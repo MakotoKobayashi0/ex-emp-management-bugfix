@@ -82,7 +82,17 @@ public class AdministratorController {
 			result.rejectValue("password", null, "パスワードを入力してください");
 		}
 		
-		if (form.getName().length() == 0 || form.getMailAddress().length() == 0 || form.getPassword().length() == 0) {
+		if (form.getConfirmPassword().length() == 0) {
+			result.rejectValue("confirmPassword", null, "確認用パスワードを入力してください");
+		}
+		
+		if(form.getPassword().equals(form.getConfirmPassword())) {
+			result.rejectValue("confirmPassword", null, "入力されたパスワードと確認用パスワードが一致しません");
+			return "administrator/insert";
+		}
+		
+		if (form.getName().length() == 0 || form.getMailAddress().length() == 0 || 
+				form.getPassword().length() == 0 || form.getConfirmPassword().length() == 0) {
 			return "administrator/insert"; 
 		}
 		

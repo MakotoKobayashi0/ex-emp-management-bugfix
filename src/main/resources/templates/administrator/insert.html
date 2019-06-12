@@ -5,8 +5,10 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>従業員管理システム</title>
-<link rel="stylesheet" href="../../static/css/bootstrap.css" th:href="@{/css/bootstrap.css}" >
-<link rel="stylesheet" href="../../static/css/style.css" th:href="@{/css/style.css}" >
+<link rel="stylesheet" href="../../static/css/bootstrap.css"
+	th:href="@{/css/bootstrap.css}">
+<link rel="stylesheet" href="../../static/css/style.css"
+	th:href="@{/css/style.css}">
 <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
@@ -17,35 +19,37 @@
 		<!-- 上余白 -->
 		<div class="row">
 			<div class="col-lg-offset-0 col-lg-6 col-md-8 col-sm-10 col-xs-12">
-				<img src="../../static/img/header_logo.png" th:src="@{/img/header_logo.png}">
+				<img src="../../static/img/header_logo.png"
+					th:src="@{/img/header_logo.png}">
 			</div>
 		</div>
 		<!-- login form -->
 		<div class="row">
-			<div class="col-lg-offset-3 col-lg-6 col-md-offset-2 col-md-8 col-sm-10 col-xs-12">
+			<div
+				class="col-lg-offset-3 col-lg-6 col-md-offset-2 col-md-8 col-sm-10 col-xs-12">
 				<!-- 背景をグレーに、埋め込んだようなコンポーネント -->
 				<div class="well">
-
 				
-<!-- ここから上を編集する必要はありません -->
+					<!-- ここから上を編集する必要はありません -->
 
-<!-- ここにモックのform要素を貼り付けます -->
+					<!-- ここにモックのform要素を貼り付けます -->
 
-					<form method="post" action="login.html" th:action="@{/insert}" th:object="${insertAdministratorForm}">
+					<form method="post" action="login.html" th:action="@{/insert}"
+						th:object="${insertAdministratorForm}">
 						<fieldset>
-							<legend>管理者登録<br>(システムにログインできる管理者を登録します)</legend>
+							<legend>
+								管理者登録<br>(システムにログインできる管理者を登録します)
+							</legend>
 							<!-- 氏名 -->
 							<div class="form-group">
 								<div class="row">
 									<div class="col-sm-12">
-										<label for="name">
-											氏名:
-										</label>
-										<label th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="error-messages">
-											氏名を入力してください
-										</label>
-										<input type="text" name="name" id="name" class="form-control" placeholder="山田太郎"
-											 th:field="*{name}" th:errorclass="error-input" value="山田太郎">
+										<label for="name"> 氏名: </label> <label
+											th:if="${#fields.hasErrors('name')}" th:errors="*{name}"
+											class="error-messages"> 氏名を入力してください </label> <input
+											type="text" name="name" id="name" class="form-control"
+											placeholder="山田太郎" th:field="*{name}"
+											th:errorclass="error-input" value="山田太郎">
 									</div>
 								</div>
 							</div>
@@ -53,14 +57,13 @@
 							<div class="form-group">
 								<div class="row">
 									<div class="col-sm-12">
-										<label for="mailAddress">
-											メールアドレス:
-										</label>
-										<label th:if="${#fields.hasErrors('mailAddress')}" th:errors="*{mailAddress}" class="error-messages">
-											メールアドレスを入力してください
-										</label>
-										<input type="text" name="mailAddress" id="mailAddress" class="form-control" placeholder="yamada@mail.com"
-											 th:field="*{mailAddress}" th:errorclass="error-input" value="yamada@mail.com">
+										<label for="mailAddress"> メールアドレス: </label> <label
+											th:if="${#fields.hasErrors('mailAddress')}"
+											th:errors="*{mailAddress}" class="error-messages">
+											メールアドレスを入力してください </label> <input type="text" name="mailAddress"
+											id="mailAddress" class="form-control"
+											placeholder="yamada@mail.com" th:field="*{mailAddress}"
+											th:errorclass="error-input" value="yamada@mail.com">
 									</div>
 								</div>
 							</div>
@@ -68,14 +71,27 @@
 							<div class="form-group">
 								<div class="row">
 									<div class="col-sm-12">
-										<label for="passwaord">
-											パスワード:
-										</label>
-										<label th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="error-messages">
-											パスワードを入力してください
-										</label>
-										<input type="password" name="password" id="password" class="form-control" placeholder="password"
-											 th:field="*{password}" th:errorclass="error-input" value="xxxxxxxx">
+										<label for="password"> パスワード: </label> <label
+											th:if="${#fields.hasErrors('password')}"
+											th:errors="*{password}" class="error-messages">
+											パスワードを入力してください </label> <input type="password" name="password"
+											id="password" class="form-control" placeholder="password"
+											th:field="*{password}" th:errorclass="error-input"
+											value="xxxxxxxx">
+									</div>
+								</div>
+							</div>
+							<!-- 確認用パスワード -->
+							<div class="form-group">
+								<div class="row">
+									<div class="col-sm-12">
+										<label for="confirmPassword"> パスワード: </label>
+										<label th:if="${#fields.hasErrors('confirmPassword')}"
+										th:errors="*{confirmPassword}" class="error-messages"></label> 
+											<input type="password" name="confirmPassword"
+											id="confirmPassword" class="form-control"
+											placeholder="password" th:field="*{confirmPassword}"
+											th:errorclass="error-input" value="xxxxxxxx">
 									</div>
 								</div>
 							</div>
@@ -89,10 +105,7 @@
 							</div>
 						</fieldset>
 					</form>
-
-
-
-<!-- ここから下を編集する必要はありません -->
+					<!-- ここから下を編集する必要はありません -->
 				</div>
 			</div>
 		</div>
