@@ -109,6 +109,7 @@ public class AdministratorController {
 			result.addError(new ObjectError("loginError", "メールアドレスまたはパスワードが不正です。"));
 			return toLogin();
 		}
+		session.setAttribute("administratorName", administrator.getName());
 		return "forward:/employee/showList";
 	}
 	
