@@ -33,6 +33,17 @@ public class EmployeeService {
 	}
 	
 	/**
+	 * 従業員を名前であいまい検索します.
+	 * 
+	 * @param name
+	 * @return 従業員のリスト
+	 */
+	public List<Employee> findByName(String name) {
+		List<Employee> employeeList = employeeRepository.findByName(name);
+		return employeeList;
+	}
+	
+	/**
 	 * 従業員情報を取得します.
 	 * 
 	 * @param id ID
