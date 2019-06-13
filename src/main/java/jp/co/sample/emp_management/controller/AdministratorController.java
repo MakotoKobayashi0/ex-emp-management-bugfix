@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -58,9 +59,6 @@ public class AdministratorController {
 	 */
 	@RequestMapping("/toInsert")
 	public String toInsert() {
-//		if (true) {
-//			throw new RuntimeException("エラー");
-//		}
 		return "administrator/insert";
 	}
 
@@ -72,35 +70,17 @@ public class AdministratorController {
 	 * @return ログイン画面へリダイレクト
 	 */
 	@RequestMapping("/insert")
-	public String insert(InsertAdministratorForm form, BindingResult result) {
-		if (form.getName().length() == 0) {
-			result.rejectValue("name", null, "氏名を入力してください");
-		}
-		
-		if (form.getMailAddress().length() == 0) {
-			result.rejectValue("mailAddress", null, "メールアドレスを入力してください");
-		}
-		
-		if (form.getPassword().length() == 0) {
-			result.rejectValue("password", null, "パスワードを入力してください");
-		}
-		
-		if (form.getConfirmPassword().length() == 0) {
-			result.rejectValue("confirmPassword", null, "確認用パスワードを入力してください");
-		}
-		
+	public String insert(@Validated InsertAdministratorForm form, BindingResult result) {
 		if(form.getPassword().equals(form.getConfirmPassword())) {
 			result.rejectValue("confirmPassword", null, "入力されたパスワードと確認用パスワードが一致しません");
-			return "administrator/insert";
-		}
-		
-		if (form.getName().length() == 0 || form.getMailAddress().length() == 0 || 
-				form.getPassword().length() == 0 || form.getConfirmPassword().length() == 0) {
-			return "administrator/insert"; 
 		}
 		
 		if (administratorService.findByMailAddress(form.getMailAddress()) != null) {
-			return toInsert();
+			result.rejectValue("mailAddress", null, "存在するメールアドレスです");
+		}
+		
+		if (result.hasErrors()) {
+			return "administrator/insert"; 
 		}
 		
 		Administrator administrator = new Administrator();
