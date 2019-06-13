@@ -61,7 +61,7 @@ public class EmployeeController {
 	@RequestMapping("/showList")
 	public String showList(Model model, SearchEmployeeForm form) {
 		System.out.println(form.getName());
-		if(form.getName().length() != 0) {
+		if(form.getName() != null && form.getName().length() != 0) {
 			List<Employee> employeeList = employeeService.findByName(form.getName());
 			model.addAttribute("employeeList", employeeList);
 		} else {
