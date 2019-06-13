@@ -58,6 +58,9 @@ public class AdministratorController {
 	 */
 	@RequestMapping("/toInsert")
 	public String toInsert() {
+//		if (true) {
+//			throw new RuntimeException("エラー");
+//		}
 		return "administrator/insert";
 	}
 
