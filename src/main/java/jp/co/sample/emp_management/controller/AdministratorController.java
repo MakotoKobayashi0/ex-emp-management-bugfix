@@ -29,7 +29,7 @@ public class AdministratorController {
 
 	@Autowired
 	private AdministratorService administratorService;
-	
+
 	@Autowired
 	private HttpSession session;
 
@@ -42,8 +42,8 @@ public class AdministratorController {
 	public InsertAdministratorForm setUpInsertAdministratorForm() {
 		return new InsertAdministratorForm();
 	}
-	
-	//  (SpringSecurityに任せるためコメントアウトしました)
+
+	// (SpringSecurityに任せるためコメントアウトしました)
 	@ModelAttribute
 	public LoginForm setUpLoginForm() {
 		return new LoginForm();
@@ -65,24 +65,23 @@ public class AdministratorController {
 	/**
 	 * 管理者情報を登録します.
 	 * 
-	 * @param form
-	 *            管理者情報用フォーム
+	 * @param form 管理者情報用フォーム
 	 * @return ログイン画面へリダイレクト
 	 */
 	@RequestMapping("/insert")
 	public String insert(@Validated InsertAdministratorForm form, BindingResult result) {
-		if(form.getPassword().equals(form.getConfirmPassword())) {
+		if (!form.getPassword().equals(form.getConfirmPassword())) {
 			result.rejectValue("confirmPassword", null, "入力されたパスワードと確認用パスワードが一致しません");
 		}
-		
+
 		if (administratorService.findByMailAddress(form.getMailAddress()) != null) {
 			result.rejectValue("mailAddress", null, "存在するメールアドレスです");
 		}
-		
+
 		if (result.hasErrors()) {
-			return "administrator/insert"; 
+			return "administrator/insert";
 		}
-		
+
 		Administrator administrator = new Administrator();
 		// フォームからドメインにプロパティ値をコピー
 		BeanUtils.copyProperties(form, administrator);
@@ -106,10 +105,8 @@ public class AdministratorController {
 	/**
 	 * ログインします.
 	 * 
-	 * @param form
-	 *            管理者情報用フォーム
-	 * @param result
-	 *            エラー情報格納用オブッジェクト
+	 * @param form   管理者情報用フォーム
+	 * @param result エラー情報格納用オブッジェクト
 	 * @return ログイン後の従業員一覧画面
 	 */
 	@RequestMapping("/login")
@@ -122,7 +119,7 @@ public class AdministratorController {
 		session.setAttribute("administratorName", administrator.getName());
 		return "forward:/employee/showList";
 	}
-	
+
 	/////////////////////////////////////////////////////
 	// ユースケース：ログアウトをする
 	/////////////////////////////////////////////////////
@@ -136,5 +133,5 @@ public class AdministratorController {
 		session.invalidate();
 		return "redirect:/";
 	}
-	
+
 }

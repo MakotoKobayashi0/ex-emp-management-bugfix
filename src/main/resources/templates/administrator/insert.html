@@ -49,7 +49,7 @@
 											class="error-messages"> 氏名を入力してください </label> <input
 											type="text" name="name" id="name" class="form-control"
 											placeholder="山田太郎" th:field="*{name}"
-											th:errorclass="error-input" value="山田太郎">
+											th:errorclass="error-input">
 									</div>
 								</div>
 							</div>
@@ -63,7 +63,7 @@
 											メールアドレスを入力してください </label> <input type="text" name="mailAddress"
 											id="mailAddress" class="form-control"
 											placeholder="yamada@mail.com" th:field="*{mailAddress}"
-											th:errorclass="error-input" value="yamada@mail.com">
+											th:errorclass="error-input">
 									</div>
 								</div>
 							</div>
@@ -76,8 +76,7 @@
 											th:errors="*{password}" class="error-messages">
 											パスワードを入力してください </label> <input type="password" name="password"
 											id="password" class="form-control" placeholder="password"
-											th:field="*{password}" th:errorclass="error-input"
-											value="xxxxxxxx">
+											th:field="*{password}" th:errorclass="error-input">
 									</div>
 								</div>
 							</div>
@@ -91,7 +90,7 @@
 											<input type="password" name="confirmPassword"
 											id="confirmPassword" class="form-control"
 											placeholder="password" th:field="*{confirmPassword}"
-											th:errorclass="error-input" value="xxxxxxxx">
+											th:errorclass="error-input">
 									</div>
 								</div>
 							</div>
