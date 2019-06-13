@@ -1,5 +1,8 @@
 package jp.co.sample.emp_management.controller;
 
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.util.List;
 
 import org.springframework.beans.BeanUtils;
@@ -76,7 +79,8 @@ public class EmployeeController {
 		if (form.getName() == null 
 				|| form.getName().length() == 0
 				|| employeeList.size() == 0) {
-			employeeList = employeeService.showList();
+			
+				employeeList = employeeService.showList();
 			model.addAttribute("employeeList", employeeList);
 		}
 		
@@ -122,17 +126,42 @@ public class EmployeeController {
 		return "redirect:/employee/showList";
 	}
 
+	/**
+	 * 従業員登録フォームに遷移する.
+	 * 
+	 * @return 従業員登録画面
+	 */
 	@RequestMapping("/toRegist")
 	public String toRegist() {
 		return "employee/register";
 	}
 
+	/**
+	 * 従業員登録を行う.
+	 * 
+	 * @param form フォーム
+	 * @return 従業員リスト
+	 */
 	@RequestMapping("/register")
 	public String register(RegistrationEmployeeForm form) {
-		System.out.println("hello");
 		Employee employee = new Employee();
+		String imageName = form.getImage().getOriginalFilename();
+		String filePath = "src/main/resources/static/img/" + imageName;
+		
+		try {
+			File uploadFile =new File(filePath);
+			byte[] bytes = form.getImage().getBytes();
+            BufferedOutputStream uploadFileStream = new BufferedOutputStream(new FileOutputStream(uploadFile));
+            uploadFileStream.write(bytes);
+            uploadFileStream.close();
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		
 		BeanUtils.copyProperties(form, employee);
+		employee.setImage(imageName);
 		employeeService.insert(employee);
-		return "redirect:/employee/showDetail";
+		
+		return "redirect:/employee/showList";
 	}
 }
