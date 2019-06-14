@@ -3,6 +3,7 @@ package jp.co.sample.emp_management.controller;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.BeanUtils;
@@ -76,15 +77,20 @@ public class EmployeeController {
 	public String showList(Model model, SearchEmployeeForm form) {
 		List<Employee> employeeList = employeeService.findByName(form.getName());
 		
-		if (form.getName() == null 
-				|| form.getName().length() == 0
-				|| employeeList.size() == 0) {
-			
+		if (form.getName() == null || form.getName().length() == 0 || employeeList.size() == 0) {	
 				employeeList = employeeService.showList();
-			model.addAttribute("employeeList", employeeList);
+				model.addAttribute("employeeList", employeeList);
 		}
-		
+	
 		model.addAttribute("employeeList", employeeList);
+		
+		List<Employee> employees = employeeService.showList();
+		List<String> employeeNames = new ArrayList<>();
+		for (Employee employee : employees) {
+			employeeNames.add(employee.getName());
+		}
+		model.addAttribute("employeeNames", employeeNames);
+		
 		return "employee/list";
 	}
 

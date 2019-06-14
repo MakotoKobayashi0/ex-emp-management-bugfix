@@ -10,6 +10,29 @@
 	th:href="@{/css/bootstrap.css}">
 <link rel="stylesheet" href="../../static/css/style.css"
 	th:href="@{/css/style.css}">
+	
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="../../static/js/bootstrap.min.js"></script>
+<!-- Autocomplete for search field -->
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
+
+<script th:inline="javascript">
+	/*<![CDATA[*/
+	$(function () {
+		alert("hello")
+		var data = /*[[${employeeNames}]]*/
+	    $('#employee-search').autocomplete({
+	        source: data,
+	        autoFocus: true,
+	        delay: 500,
+	        minLength: 2
+	    });
+	});
+	/*]]>*/
+</script>
+
 <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
@@ -62,7 +85,7 @@
 		</ol>
 		<form method="post" th:action="@{/employee/showList}">
 			<div class="input-group">
-				<input type="text" name="name" class="form-control" placeholder="探したい従業員の名前を入れてください"> 
+				<input type="text" name="name" id="employee-search" class="form-control" placeholder="探したい従業員の名前を入れてください"> 
 				<span class="input-group-btn">
 					<button type="submit" class="btn btn-primary">検索</button>
 				</span>
@@ -106,8 +129,5 @@
 	</div>
 	<!-- end container -->
 
-	<script
-		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-	<script src="../../static/js/bootstrap.min.js"></script>
 </body>
 </html>
