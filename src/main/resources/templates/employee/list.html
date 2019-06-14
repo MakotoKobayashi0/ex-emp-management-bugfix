@@ -21,10 +21,8 @@
 <script th:inline="javascript">
 	/*<![CDATA[*/
 	$(function () {
-		alert("hello")
-		var data = /*[[${employeeNames}]]*/
 	    $('#employee-search').autocomplete({
-	        source: data,
+	        source: /*[[${employeeNames}]]*/,
 	        autoFocus: true,
 	        delay: 500,
 	        minLength: 2
