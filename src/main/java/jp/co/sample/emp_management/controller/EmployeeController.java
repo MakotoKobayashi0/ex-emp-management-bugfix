@@ -89,6 +89,7 @@ public class EmployeeController {
 		for (Employee employee : employees) {
 			employeeNames.add(employee.getName());
 		}
+		
 		model.addAttribute("employeeNames", employeeNames);
 		
 		return "employee/list";

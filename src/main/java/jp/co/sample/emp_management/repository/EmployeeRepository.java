@@ -43,7 +43,7 @@ public class EmployeeRepository {
 
 	@Autowired
 	private NamedParameterJdbcTemplate template;
-
+	
 	/**
 	 * 従業員一覧情報を入社日順で取得します.
 	 * 
