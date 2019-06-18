@@ -10,6 +10,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import jp.co.sample.emp_management.service.UserDetailsServiceImpl;
 
@@ -44,6 +45,12 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 			.defaultSuccessUrl("/employee/showList", true)
 			.usernameParameter("mailAddress")
 			.passwordParameter("password");
+		
+		http.logout() // ログアウトに関する設定
+			.logoutRequestMatcher(new AntPathRequestMatcher("/logout**")) 
+			.logoutSuccessUrl("/")
+			.deleteCookies("JSESSIONID")
+			.invalidateHttpSession(true);
 	}
 
     /**
