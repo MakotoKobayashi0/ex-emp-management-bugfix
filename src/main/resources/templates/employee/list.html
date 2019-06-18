@@ -13,11 +13,11 @@
 
 <script src="../../static/js/bootstrap.min.js"></script>
 <!-- Autocomplete for search field -->
-<link rel="stylesheet"
-	href="css/jquery-ui.css">
-<script type="text/javascript"　src="../../static/js/jquery-1.11.3.min.js"></script>
-<script type="text/javascript" src="../../static/js/jquery-ui.js"></script>
-<script type="text/javascript" src="../../static/js/jquery.pagination.js"></script>
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
+<script type="text/javascript" th:src="@{/js/jquery.pagination.js}"></script>
 
 <script th:inline="javascript">
 	/*<![CDATA[*/
@@ -69,7 +69,7 @@
 							th:href="@{/employee/showList}">従業員管理</a></li>
 					</ul>
 					<p class="navbar-text navbar-right">
-						<span th:text="${session.administratorName}">山田太郎</span>さんこんにちは！
+						<span sec:authentication="principal.admin.name">山田</span>さんこんにちは！
 						&nbsp;&nbsp;&nbsp; <a href="../administrator/login.html"
 							class="navbar-link" th:href="@{/logout}">ログアウト</a>
 					</p>

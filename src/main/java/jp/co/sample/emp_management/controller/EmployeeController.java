@@ -8,6 +8,7 @@ import java.util.List;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import jp.co.sample.emp_management.domain.Employee;
+import jp.co.sample.emp_management.domain.LoginAdministrator;
 import jp.co.sample.emp_management.form.RegistrationEmployeeForm;
 import jp.co.sample.emp_management.form.SearchEmployeeForm;
 import jp.co.sample.emp_management.form.UpdateEmployeeForm;
@@ -74,7 +76,8 @@ public class EmployeeController {
 	 * @return 従業員一覧画面
 	 */
 	@RequestMapping("/showList")
-	public String showList(Model model, SearchEmployeeForm form) {
+	public String showList(Model model, SearchEmployeeForm form, 
+			@AuthenticationPrincipal LoginAdministrator userDetail) {
 		List<Employee> employeeList = employeeService.findByName(form.getName());
 		
 		if (form.getName() == null || form.getName().length() == 0 || employeeList.size() == 0) {	
